@@ -2,13 +2,10 @@ package transport;
 
 import java.security.Key;
 
-public class Car {
-    private final String brand;
-    private final String model;
+public class Car extends Transport {
+
     private double engineVolume;
-    private String color;
-    private final int year;
-    private final String country;
+
 
     private String gear;
 
@@ -54,34 +51,22 @@ public class Car {
                String color,
                int year,
                String country,
+               int maxSpeed,
                String gear,
                String tupeOfBody,
                String regNumber,
                int capacity,
                boolean summerTyres,
                Key key) {
-        if (brand == null || brand.isEmpty()) {
-            System.out.println("default");
-        }
-        this.brand = brand;
-        if (model == null || model.isEmpty()) {
-            System.out.println("default");
-        }
-        this.model = model;
+        super(brand, model, year, country, color, maxSpeed);
+
+
 
         setEngineVolume(engineVolume);
-        setColor(color);
+
         this.engineVolume = engineVolume;
 
 
-        if (year <= 0) {
-            year = 2000;
-        }
-        this.year = year;
-        if (country == null || country.isEmpty()) {
-            System.out.println("default");
-        }
-        this.country = country;
         setGear(gear);
         if(tupeOfBody==null||tupeOfBody.isEmpty()){
             tupeOfBody= "Седан";
@@ -97,13 +82,7 @@ public class Car {
 
     }
 
-    public String getBrand() {
-        return brand;
-    }
 
-    public String getModel() {
-        return model;
-    }
 
     public double getEngineVolume() {
         return engineVolume;
@@ -116,24 +95,11 @@ public class Car {
         this.engineVolume = engineVolume;
     }
 
-    public String getColor() {
-        return color;
-    }
 
-    public void setColor(String color) {
-        if (color == null || color.isEmpty()) {
-            color = "Белый";
-        }
-        this.color = color;
-    }
 
-    public int getYear() {
-        return year;
-    }
 
-    public String getCountry() {
-        return country;
-    }
+
+
 
     public String getGear() {
         return gear;
@@ -195,12 +161,8 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Марка : " + brand + " ," +
-                "Модель : " + model + " ," +
+        return super.toString() + ", " +
                 "Объем двигателя  : " + engineVolume + " ," +
-                "Цвет : " + color + " ," +
-                "Год выпуска : " + year + " ," +
-                "Страна производитель : " + country+
                 "Коробка передач : " + gear + " ," +
                 "Тип кузова : " + tupeOfBody + " ," +
                 "Регистрационный номер : " + regNumber + "  ," +
