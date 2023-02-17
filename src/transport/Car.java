@@ -2,10 +2,41 @@ package transport;
 
 import java.security.Key;
 
-public class Car extends Transport<DriverB> {
-    public Car(String brand, String model, double engineVolume, DriverB driver) {
-        super(brand, model, engineVolume, driver);
+public abstract class Car extends Transport <DriverB> {
+    private final BodyType bodyType;
+    public enum BodyType{
+        SEDAN("Sedan"),
+        HATCHBACK("Hatchback"),
+        COUPE("Coupe"),
+        UNIVERSAL("Universal"),
+        SUV("SUV"),
+        CROSSOVER("Crossover"),
+        PICKUP("Pickup"),
+        VAN("Van"),
+        MINIVAN("Minivan");
+
+        private final String bodyType;
+
+        BodyType(String bodyType) {
+            this.bodyType = bodyType;
+        }
+
+        public String getBodyType(){
+            return bodyType;
+        }
+
     }
+
+    public Car(String brand, String model, double engineCapacity, DriverB driver, Type type, BodyType bodyType) {
+        super(brand, model, engineCapacity, driver, type);
+        this.bodyType = bodyType;
+    }
+
+    @Override
+    public String toString() {
+        return "Тип кузова: " + bodyType + " " + super.toString();
+    }
+
 
     @Override
     public void startMove() {
@@ -15,6 +46,15 @@ public class Car extends Transport<DriverB> {
     @Override
     public void finishMove() {
         System.out.println("Автомобиль марки: " + getBrand() + " закончил движение!");
+    }
+    @Override
+    public Type getType() {
+        return Type.CAR;
+    }
+
+    @Override
+    public void printType() {
+        System.out.println("Тип автомобиля " + (this.bodyType != null ? this.bodyType.toString() : " Данных по транспортному средству недостаточно"));
     }
     public void pitStop(){
         System.out.println("Пит стоп у автомобиля");
